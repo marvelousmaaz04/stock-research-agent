@@ -101,9 +101,9 @@ Positive Factors: strong brand, cash flow, growth in services
 Risks: competition, regulatory challenges  
 
 🔗 Sources
-[1] https://finance.yahoo.com/quote/AAPL
-[2] https://www.reuters.com/companies/AAPL.OQ
-[3] https://www.marketwatch.com/investing/stock/aapl
+[1] https://finance.yahoo.com/quote/AAPL/
+[2] https://stockanalysis.com/stocks/aapl/forecast/
+[3] https://edition.cnn.com/markets/stocks/AAPL
 ```
 
 ---
