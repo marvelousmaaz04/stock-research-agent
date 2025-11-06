@@ -36,10 +36,10 @@ if prompt := st.chat_input("What company do you want to research?"):
     with st.chat_message("assistant"):
         
         def stream_agent_response(user_prompt, session_id):
-            # Pass the session_id to Agno.
-            # Agno's db will automatically save/load history for this ID.
+            
+           
             stream = stock_research_agent.run(user_prompt, session_id=session_id, stream=True)
-            # pprint_run_response(stream, markdown=True)
+           
             for chunk in stream:
                 yield chunk.content
         
