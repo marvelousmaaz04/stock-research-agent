@@ -1988,7 +1988,7 @@ wheels = [
 ]
 
 [[package]]
-name = "stock-researcher-agent"
+name = "stock-research-agent"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [
