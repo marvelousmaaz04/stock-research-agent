@@ -1,7 +1,3 @@
-Perfect — since you’re using **Agno**, **Gemini**, **Streamlit**, and `uv` for package management (with a `pyproject.toml`), here’s a professional, clear, and developer-friendly `README.md` you can directly add to your repo 👇
-
----
-
 ## 📈 Stock Research Agent
 
 An AI-powered **Stock Research Assistant** built with [Agno](https://docs.agno.com/), **Gemini 2.0 Flash**, and **Streamlit**.
@@ -63,12 +59,11 @@ uv sync
 Create a `.env` file in the project root with your API keys:
 
 ```bash
-GEMINI_API_KEY=your_gemini_api_key_here
+GOOGLE_API_KEY=your_gemini_api_key_here
 TAVILY_API_KEY=your_tavily_api_key_here
 FIRECRAWL_API_KEY=your_firecrawl_api_key_here
 ```
 
-*(Optional keys like Firecrawl can be skipped if not needed — the app will handle it gracefully.)*
 
 #### 4️⃣ Run the Streamlit App
 
@@ -135,8 +130,6 @@ Risks: competition, regulatory challenges
 | **TavilyTools**       | Web search and price target discovery   |
 | **GoogleSearchTools** | Fallback for Tavily                     |
 | **FirecrawlTools**    | Webpage summarization                   |
-| **SqliteDb**          | Long-term session memory                |
-| **Gemini 2.0 Flash**  | AI reasoning and synthesis              |
 
 ---
 
