@@ -2,47 +2,46 @@
 import streamlit as st
 import uuid
 from agent import stock_research_agent
-
+from agno.utils.pprint import pprint_run_response
 
 st.set_page_config(page_title="🤖 Stock Research Agent", page_icon="📈")
-
-# --- 1. Cleaned Header ---
-# Replaced the multiple HTML markdowns with cleaner, native components
 st.title("🤖 Stock Research Agent")
 st.caption("Ask me to research a company (e.g., 'research jio' or 'AAPL')")
 
-# --- 2. Initialize Session State ---
+# --- 1. Initialize Session State ---
+
 if "session_id" not in st.session_state:
+    # Create a unique ID for this user's session
     st.session_state.session_id = str(uuid.uuid4())
+
 if "messages" not in st.session_state:
+    # Store the chat history
     st.session_state.messages = []
 
-# --- 3. Display Chat History ---
+# --- 2. Display Chat History ---
+# Loop through all stored messages and display them
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# --- 4. Handle New User Input ---
-if prompt := st.chat_input("Research AAPL or ask about Jio..."):
+# --- 3. Handle New User Input ---
+if prompt := st.chat_input("What company do you want to research?"):
     
     # Add user message to history and display it
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # --- 5. Get and Stream Agent Response ---
+    # --- 4. Get and Stream Agent Response ---
     with st.chat_message("assistant"):
         
-        # --- CRITICAL FIXES HERE ---
         def stream_agent_response(user_prompt, session_id):
-            # Use .stream() for conversational streaming
-            stream = stock_research_agent.stream(user_prompt, session_id=session_id)
-            
-            # Filter for 'text' chunks. This prevents printing
-            # 'None' from tool calls and other event data.
+            # Pass the session_id to Agno.
+            # Agno's db will automatically save/load history for this ID.
+            stream = stock_research_agent.run(user_prompt, session_id=session_id, stream=True)
+            # pprint_run_response(stream, markdown=True)
             for chunk in stream:
-                if chunk.type == "text":
-                    yield chunk.content
+                yield chunk.content
         
         # `st.write_stream` displays the text chunks as they arrive
         response = st.write_stream(stream_agent_response(prompt, st.session_state.session_id))
